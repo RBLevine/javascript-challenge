@@ -5,13 +5,16 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 // Set up initial display
-tableData.forEach((sighting) =>{
-    var row = tbody.append("tr");
-    Object.entries(sighting).forEach(([key,value]) => {
-        var cell = row.append("td");
-        cell.text(value);
+function init(){
+    tableData.forEach((sighting) =>{
+        var row = tbody.append("tr");
+        Object.values(sighting).forEach(value => {
+            var cell = row.append("td");
+            cell.text(value);
+        });
     });
-});
+};
+
 
 // Select the button
 var button = d3.select("#button");
@@ -37,14 +40,21 @@ function runEnter(){
     var inputValue = inputElement.property("value"); 
     console.log(inputValue)
 
-    var filteredData = tableData.filter(item => item.datetime === inputElement);
+    var filteredData = tableData.filter(table => table.datetime === inputValue);
+    console.log(filteredData);
+
+    // Get a reference to the table body
+    var tbody = d3.select("tbody");
+    tbody.html("");
 
     filteredData.forEach((sighting) =>{
         var row = tbody.append("tr");
-        Object.entries(sighting).forEach(([key,value]) =>{
+        Object.values(sighting).forEach(value =>{
             var cell = row.append("td");
             cell.text(value);
         });
     });
 
 };
+
+init();
