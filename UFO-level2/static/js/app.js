@@ -20,7 +20,7 @@ function init(){
 var button = d3.select("#filter-btn");
 
 // Select the form
-var form = d3.select("form");
+var form = d3.select("#form");
 
 // Create event handlers 
 button.on("click", runEnter);
